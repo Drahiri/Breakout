@@ -7,4 +7,12 @@ var direction := initial_direction
 var speed := initial_speed
 
 func _physics_process(delta):
-	move_and_collide(direction * speed * delta)
+	var collider := move_and_collide(direction * speed * delta)
+
+	if collider == null:
+		return
+
+	if collider.get_collider().name == "Paddle":
+		direction = (position - collider.get_collider().position).normalized()
+	else:
+		direction = direction.bounce(collider.get_normal())

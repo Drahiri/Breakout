@@ -12,4 +12,4 @@
 position = Vector2(401, 530)
 
 [node name="Ball" parent="." instance=ExtResource("3_itwyg")]
-position = Vector2(376, 475)
+position = Vector2(263, 237)

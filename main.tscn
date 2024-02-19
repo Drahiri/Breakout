@@ -1,19 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://37ockrhtdpl7"]
+[gd_scene load_steps=3 format=3 uid="uid://37ockrhtdpl7"]
 
-[ext_resource type="PackedScene" uid="uid://b8k4fox7v4gmb" path="res://world_boundaries.tscn" id="1_u456f"]
 [ext_resource type="PackedScene" uid="uid://q0q3bu257ea6" path="res://paddle.tscn" id="2_xk5ur"]
 [ext_resource type="PackedScene" uid="uid://ddfwctkacd4hk" path="res://ball.tscn" id="3_itwyg"]
-[ext_resource type="PackedScene" uid="uid://fuwpa0pwchho" path="res://block.tscn" id="4_yijrk"]
 
 [node name="Main" type="Node"]
 
-[node name="WorldBoundaries" parent="." instance=ExtResource("1_u456f")]
-
 [node name="Paddle" parent="." instance=ExtResource("2_xk5ur")]
-position = Vector2(401, 530)
+position = Vector2(408, 545)
 
 [node name="Ball" parent="." instance=ExtResource("3_itwyg")]
-position = Vector2(263, 237)
-
-[node name="Block" parent="." instance=ExtResource("4_yijrk")]
-position = Vector2(463, 174)
+position = Vector2(395, 514)

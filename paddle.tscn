@@ -9,6 +9,7 @@ height = 100.0
 
 [node name="Paddle" type="CharacterBody2D"]
 script = ExtResource("1_874vc")
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.195, 0.195)

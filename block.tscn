@@ -8,6 +8,7 @@
 size = Vector2(128, 128)
 
 [node name="Block" type="StaticBody2D" groups=["blocks"]]
+collision_mask = 0
 script = ExtResource("1_eq17d")
 solid_block_texture = ExtResource("1_5teuc")
 metadata/_edit_group_ = true

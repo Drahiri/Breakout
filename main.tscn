@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://37ockrhtdpl7"]
+[gd_scene load_steps=5 format=3 uid="uid://37ockrhtdpl7"]
 
 [ext_resource type="PackedScene" uid="uid://b8k4fox7v4gmb" path="res://world_boundaries.tscn" id="1_u456f"]
 [ext_resource type="PackedScene" uid="uid://q0q3bu257ea6" path="res://paddle.tscn" id="2_xk5ur"]
 [ext_resource type="PackedScene" uid="uid://ddfwctkacd4hk" path="res://ball.tscn" id="3_itwyg"]
+[ext_resource type="PackedScene" uid="uid://dni10g1u548hx" path="res://level.tscn" id="4_1ru6l"]
 
 [node name="Main" type="Node"]
 
@@ -13,3 +14,5 @@ position = Vector2(408, 545)
 position = Vector2(395, 514)
 
 [node name="WorldBoundaries" parent="." instance=ExtResource("1_u456f")]
+
+[node name="Level" parent="." instance=ExtResource("4_1ru6l")]

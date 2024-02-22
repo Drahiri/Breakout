@@ -1,5 +1,7 @@
 extends StaticBody2D
 
+signal destroyed
+
 @export var solid_block_texture := Texture2D
 
 var block_types = {
@@ -23,5 +25,8 @@ func get_size():
 	return $Sprite2D.texture.get_size()
 
 func destroy():
-	if (not is_solid):
-		queue_free()
+	if (is_solid):
+		return
+
+	queue_free()
+	destroyed.emit()

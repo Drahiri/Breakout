@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-enum TYPES {
+enum Types {
 	CHAOS,
 	CONFUSE,
 	INCREASE,
@@ -9,19 +9,19 @@ enum TYPES {
 	STICKY,
 }
 
-var type_texture := {
-	TYPES.CHAOS: load("res://textures/powerup_chaos.png"),
-	TYPES.CONFUSE: load("res://textures/powerup_confuse.png"),
-	TYPES.INCREASE: load("res://textures/powerup_increase.png"),
-	TYPES.PASSTHROUGH: load("res://textures/powerup_passthrough.png"),
-	TYPES.SPEED: load("res://textures/powerup_speed.png"),
-	TYPES.STICKY: load("res://textures/powerup_sticky.png"),
+var type_texture = {
+	Types.CHAOS: load("res://textures/powerup_chaos.png"),
+	Types.CONFUSE: load("res://textures/powerup_confuse.png"),
+	Types.INCREASE: load("res://textures/powerup_increase.png"),
+	Types.PASSTHROUGH: load("res://textures/powerup_passthrough.png"),
+	Types.SPEED: load("res://textures/powerup_speed.png"),
+	Types.STICKY: load("res://textures/powerup_sticky.png"),
 }
 
-var type: TYPES
+var type: Types
 
 func _ready():
-	$Sprite2D.texture = type_texture[TYPES.CHAOS]
+	$Sprite2D.texture = type_texture[Types.CHAOS]
 	linear_velocity.y = 150.0
 
 

@@ -5,4 +5,4 @@
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_genw7")
-block_scene = ExtResource("2_beeqr")
+BlockScene = ExtResource("2_beeqr")

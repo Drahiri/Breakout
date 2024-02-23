@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-signal destroyed
+signal destroyed(location: Vector2)
 
 @export var solid_block_texture: Texture2D
 
@@ -38,4 +38,4 @@ func destroy():
 		return
 
 	queue_free()
-	destroyed.emit()
+	destroyed.emit(position)

@@ -1,12 +1,15 @@
 extends Node2D
 
 @export var BlockScene: PackedScene
+@export var PowerUpScene: PackedScene
 
 var _block_count: int
 var _block_scale: Vector2
 var _offset: Vector2
 
 @onready var _screen_size: Vector2 = get_viewport_rect().size
+@onready var Paddle = get_node("/root/Paddle")
+@onready var Ball = get_node("/root/Ball")
 
 
 func _ready():
@@ -50,7 +53,31 @@ func _set_level_offsets(rows: int, columns: int):
 	_offset.y = block_size.y * _block_scale.y
 
 
-func _on_block_destroyed():
+func _should_spawn(chances: int):
+	return randi() % chances == 0
+
+
+func _spawn_power_up(location: Vector2):
+	var power_up := PowerUpScene.instantiate()
+	power_up.position = location
+	if _should_spawn(75):
+		power_up.type = power_up.Types.SPEED
+	elif _should_spawn(75):
+		power_up.type = power_up.Types.STICKY
+	elif _should_spawn(75):
+		power_up.type = power_up.Types.PASSTHROUGH
+	elif _should_spawn(75):
+		power_up.type = power_up.Types.INCREASE
+	elif _should_spawn(15):
+		power_up.type = power_up.Types.CONFUSE
+	elif _should_spawn(15):
+		power_up.type = power_up.Types.CHAOS
+
+	if(power_up.type != power_up.Types.NONE):
+		add_child(power_up)
+
+
+
+func _on_block_destroyed(location: Vector2):
 	_block_count -= 1
-	if(_block_count == 0):
-		print("GAME OVER")
+	_spawn_power_up(location)

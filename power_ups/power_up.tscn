@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bk5qgfq61sfy6"]
+[gd_scene load_steps=3 format=3 uid="uid://bk5qgfq61sfy6"]
 
-[ext_resource type="Script" path="res://power_up.gd" id="1_srjqu"]
-[ext_resource type="Texture2D" uid="uid://ddq68l0yndcw" path="res://textures/powerup_speed.png" id="2_x1ita"]
+[ext_resource type="Script" path="res://power_ups/power_up.gd" id="1_78s7p"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4j4jn"]
 radius = 7.5
@@ -13,12 +12,11 @@ collision_mask = 2
 gravity_scale = 0.0
 max_contacts_reported = 1
 contact_monitor = true
-script = ExtResource("1_srjqu")
+script = ExtResource("1_78s7p")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.117, 0.117)
-texture = ExtResource("2_x1ita")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -30,5 +28,9 @@ shape = SubResource("CapsuleShape2D_4j4jn")
 position = Vector2(30, 7.5)
 scale = Vector2(3, 0.75)
 
+[node name="EffectDuration" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="EffectDuration" to="." method="_on_effect_duration_timeout"]

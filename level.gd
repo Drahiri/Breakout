@@ -58,24 +58,24 @@ func _should_spawn(chances: int):
 
 
 func _spawn_power_up(location: Vector2):
-	var power_up := PowerUpScene.instantiate()
-	power_up.position = location
+	var power_up_scene: PackedScene
+
 	if _should_spawn(75):
-		power_up.type = power_up.Types.SPEED
-	elif _should_spawn(75):
-		power_up.type = power_up.Types.STICKY
-	elif _should_spawn(75):
-		power_up.type = power_up.Types.PASSTHROUGH
-	elif _should_spawn(75):
-		power_up.type = power_up.Types.INCREASE
-	elif _should_spawn(15):
-		power_up.type = power_up.Types.CONFUSE
-	elif _should_spawn(15):
-		power_up.type = power_up.Types.CHAOS
+		power_up_scene = load("res://power_ups/power_up_speed.tscn")
+	#elif _should_spawn(75):
+		#power_up_scene.type = power_up.Types.STICKY
+	#elif _should_spawn(75):
+		#power_up_scene.type = power_up.Types.PASSTHROUGH
+	#elif _should_spawn(75):
+		#power_up_scene.type = power_up.Types.INCREASE
+	#elif _should_spawn(15):
+		#power_up_scene.type = power_up.Types.CONFUSE
+	#elif _should_spawn(15):
+		#power_up_scene.type = power_up.Types.CHAOS
 
-	if(power_up.type != power_up.Types.NONE):
-		add_child(power_up)
-
+	var power_up = power_up_scene.instantiate()
+	power_up.position = location
+	add_child(power_up)
 
 
 func _on_block_destroyed(location: Vector2):

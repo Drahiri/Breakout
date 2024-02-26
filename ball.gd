@@ -4,10 +4,10 @@ extends CharacterBody2D
 @export var initial_speed: float = 364.0
 
 @onready var _direction: Vector2 = initial_direction.normalized()
-@onready var _speed: float = initial_speed
+@onready var speed: float = initial_speed
 
 func _physics_process(delta: float):
-	var collider := move_and_collide(_direction * _speed * delta)
+	var collider := move_and_collide(_direction * speed * delta)
 
 	if collider == null:
 		return

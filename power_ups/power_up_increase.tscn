@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxk3xbmna15ft"]
+
+[ext_resource type="PackedScene" uid="uid://bk5qgfq61sfy6" path="res://power_ups/power_up.tscn" id="1_mw0vo"]
+[ext_resource type="Texture2D" uid="uid://ec55lef4dv67" path="res://textures/powerup_increase.png" id="2_sjt2a"]
+
+[node name="PowerUpIncrease" instance=ExtResource("1_mw0vo")]
+modulate = Color(1, 0.6, 0.4, 1)
+script = null
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_sjt2a")

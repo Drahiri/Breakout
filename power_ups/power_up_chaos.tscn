@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bf3ihwoxqnidm"]
+
+[ext_resource type="PackedScene" uid="uid://bk5qgfq61sfy6" path="res://power_ups/power_up.tscn" id="1_ws8eo"]
+[ext_resource type="Texture2D" uid="uid://bsu36vjgxp4uj" path="res://textures/powerup_chaos.png" id="2_wqmt6"]
+
+[node name="PowerUpChaos" instance=ExtResource("1_ws8eo")]
+modulate = Color(0.901961, 0.25098, 0.25098, 1)
+script = null
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_wqmt6")
+
+[node name="EffectDuration" parent="." index="3"]
+wait_time = 15.0

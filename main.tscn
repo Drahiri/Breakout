@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://e1sufh0qlxr2"]
+
+[ext_resource type="PackedScene" uid="uid://b8k4fox7v4gmb" path="res://world_boundaries.tscn" id="1_4pa81"]
+[ext_resource type="PackedScene" uid="uid://dni10g1u548hx" path="res://level.tscn" id="2_frxen"]
+[ext_resource type="Texture2D" uid="uid://ds8jtf73h3dw8" path="res://textures/background.jpg" id="3_llkyd"]
+[ext_resource type="PackedScene" uid="uid://q0q3bu257ea6" path="res://paddle.tscn" id="4_6sutl"]
+[ext_resource type="PackedScene" uid="uid://ddfwctkacd4hk" path="res://ball.tscn" id="5_jstb8"]
+
+[node name="Main" type="Node"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_llkyd")
+expand_mode = 1
+
+[node name="WorldBoundaries" parent="." instance=ExtResource("1_4pa81")]
+
+[node name="Level" parent="." instance=ExtResource("2_frxen")]
+
+[node name="Paddle" parent="." instance=ExtResource("4_6sutl")]
+
+[node name="Ball" parent="." instance=ExtResource("5_jstb8")]

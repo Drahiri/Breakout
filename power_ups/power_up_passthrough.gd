@@ -1,6 +1,5 @@
 extends PowerUp
 
-
 func _effect():
 	Ball.passthrough = true
 	modulate = Color(1.0, 0.5, 0.5)

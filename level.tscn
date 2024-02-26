@@ -1,13 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dni10g1u548hx"]
+[gd_scene load_steps=4 format=3 uid="uid://dni10g1u548hx"]
 
 [ext_resource type="Script" path="res://level.gd" id="1_genw7"]
 [ext_resource type="PackedScene" uid="uid://fuwpa0pwchho" path="res://block.tscn" id="2_beeqr"]
-[ext_resource type="PackedScene" uid="uid://b8k4fox7v4gmb" path="res://world_boundaries.tscn" id="3_fglgk"]
 [ext_resource type="PackedScene" uid="uid://bk5qgfq61sfy6" path="res://power_ups/power_up.tscn" id="3_p4ygo"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_genw7")
 BlockScene = ExtResource("2_beeqr")
 PowerUpScene = ExtResource("3_p4ygo")
-
-[node name="WorldBoundaries" parent="." instance=ExtResource("3_fglgk")]

@@ -6,6 +6,9 @@ extends CharacterBody2D
 @onready var _direction: Vector2 = initial_direction.normalized()
 @onready var speed: float = initial_speed
 
+var sticky := false
+var passthrough := false
+
 func _physics_process(delta: float):
 	var collider := move_and_collide(_direction * speed * delta)
 

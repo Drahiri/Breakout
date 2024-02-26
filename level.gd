@@ -8,8 +8,6 @@ var _block_scale: Vector2
 var _offset: Vector2
 
 @onready var _screen_size: Vector2 = get_viewport_rect().size
-@onready var Paddle = get_node("/root/Paddle")
-@onready var Ball = get_node("/root/Ball")
 
 
 func _ready():

@@ -2,7 +2,7 @@ extends PowerUp
 
 
 func _effect():
-	pass
+	$EffectDuration.start()
 
 
 func _on_effect_duration_timeout():

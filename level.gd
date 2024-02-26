@@ -7,13 +7,21 @@ var _block_count: int
 var _block_scale: Vector2
 var _offset: Vector2
 
-@onready var _screen_size: Vector2 = get_viewport_rect().size
+var power_up_scenes = {
+	"chaos": preload("res://power_ups/power_up_chaos.tscn"),
+	"confuse": preload("res://power_ups/power_up_confuse.tscn"),
+	"increase": preload("res://power_ups/power_up_increase.tscn"),
+	"passthrough": preload("res://power_ups/power_up_passthrough.tscn"),
+	"speed": preload("res://power_ups/power_up_speed.tscn"),
+	"sticky": preload("res://power_ups/power_up_sticky.tscn"),
+}
 
 
 func _ready():
 	load_level("res://levels/one.lvl")
 
 
+#region Level Creation
 func load_level(file_name: String):
 	var level_content = FileAccess.get_file_as_string(file_name)
 	var rows = level_content.split("\n", false)
@@ -43,12 +51,14 @@ func _add_block(type: int, location: Vector2):
 
 
 func _set_level_offsets(rows: int, columns: int):
+	var screen_size: Vector2 = get_viewport_rect().size
 	var block_size = BlockScene.instantiate().get_size()
-	_block_scale.x = _screen_size.x / (block_size.x * columns)
-	_block_scale.y = (_screen_size.y / 2) / (block_size.y * rows)
+	_block_scale.x = screen_size.x / (block_size.x * columns)
+	_block_scale.y = (screen_size.y / 2) / (block_size.y * rows)
 
 	_offset.x = block_size.x * _block_scale.x
 	_offset.y = block_size.y * _block_scale.y
+#endregion
 
 
 func _should_spawn(chances: int):
@@ -59,21 +69,22 @@ func _spawn_power_up(location: Vector2):
 	var power_up_scene: PackedScene
 
 	if _should_spawn(75):
-		power_up_scene = load("res://power_ups/power_up_speed.tscn")
-	#elif _should_spawn(75):
-		#power_up_scene.type = power_up.Types.STICKY
-	#elif _should_spawn(75):
-		#power_up_scene.type = power_up.Types.PASSTHROUGH
-	#elif _should_spawn(75):
-		#power_up_scene.type = power_up.Types.INCREASE
-	#elif _should_spawn(15):
-		#power_up_scene.type = power_up.Types.CONFUSE
-	#elif _should_spawn(15):
-		#power_up_scene.type = power_up.Types.CHAOS
+		power_up_scene = power_up_scenes["speed"]
+	elif _should_spawn(75):
+		power_up_scene = power_up_scenes["sticky"]
+	elif _should_spawn(75):
+		power_up_scene = power_up_scenes["passthrough"]
+	elif _should_spawn(75):
+		power_up_scene = power_up_scenes["increase"]
+	elif _should_spawn(15):
+		power_up_scene = power_up_scenes["confuse"]
+	elif _should_spawn(15):
+		power_up_scene = power_up_scenes["chaos"]
 
-	var power_up = power_up_scene.instantiate()
-	power_up.position = location
-	add_child(power_up)
+	if power_up_scene != null:
+		var power_up = power_up_scene.instantiate()
+		power_up.position = location
+		add_child(power_up)
 
 
 func _on_block_destroyed(location: Vector2):

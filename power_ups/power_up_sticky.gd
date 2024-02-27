@@ -9,3 +9,4 @@ func _effect():
 func _on_effect_duration_timeout():
 	Ball.sticky = false
 	modulate = Color(1.0, 1.0, 1.0)
+	queue_free()

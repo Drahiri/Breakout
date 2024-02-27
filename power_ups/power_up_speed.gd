@@ -4,7 +4,4 @@ extends PowerUp
 
 func _effect():
 	Ball.speed *= ball_speed_multiplier
-
-
-func _on_effect_duration_timeout():
-	pass
+	queue_free()

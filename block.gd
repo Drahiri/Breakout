@@ -34,8 +34,5 @@ func get_size():
 	return $Sprite2D.texture.get_size()
 
 func destroy():
-	if (is_solid):
-		return
-
 	queue_free()
 	destroyed.emit(position)

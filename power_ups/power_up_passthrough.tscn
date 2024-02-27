@@ -11,5 +11,5 @@ script = ExtResource("2_47sbb")
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_e2jar")
 
-[node name="EffectDuration" parent="." index="3"]
+[node name="EffectDuration" parent="." index="3" groups=["passthrough"]]
 wait_time = 10.0

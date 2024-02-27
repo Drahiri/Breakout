@@ -6,4 +6,4 @@ func _effect():
 
 
 func _on_effect_duration_timeout():
-	pass
+	queue_free()

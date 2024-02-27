@@ -1,10 +1,7 @@
 extends PowerUp
 
-@export var increase_size_multiplier := 1.5
+@export var increase_size := 0.5
 
 func _effect():
-	Paddle.scale.x *= increase_size_multiplier
-
-
-func _on_effect_duration_timeout():
-	pass
+	Paddle.scale.x += increase_size
+	queue_free()

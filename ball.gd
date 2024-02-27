@@ -8,17 +8,23 @@ extends CharacterBody2D
 
 var sticky := false
 var passthrough := false
+var active_passthrough_count := 0
 
 func _physics_process(delta: float):
-	var collider := move_and_collide(_direction * speed * delta)
+	var collider = move_and_collide(_direction * speed * delta)
 
 	if collider == null:
 		return
 
-	if collider.get_collider().name == "Paddle":
-		_direction = (position - collider.get_collider().position).normalized()
-	else:
-		if collider.get_collider().is_in_group("blocks"):
-			collider.get_collider().destroy()
+	var normal_collision = collider.get_normal()
+	collider = collider.get_collider()
 
-		_direction = _direction.bounce(collider.get_normal())
+	if collider.name == "Paddle":
+		_direction = (position - collider.position).normalized()
+	else:
+		if collider.is_in_group("blocks") and not collider.is_solid:
+			collider.destroy()
+			if passthrough:
+				return
+
+		_direction = _direction.bounce(normal_collision)

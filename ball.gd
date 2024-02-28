@@ -6,13 +6,21 @@ extends CharacterBody2D
 @onready var _direction: Vector2 = initial_direction.normalized()
 @onready var speed: float = initial_speed
 
+var stuck := true
 var sticky := false
+var active_sticky_count := 0
 var passthrough := false
 var active_passthrough_count := 0
 
 func _physics_process(delta: float):
-	var collider = move_and_collide(_direction * speed * delta)
+	if stuck:
+		if Input.is_action_just_pressed("release_ball"):
+			stuck = false
 
+		move_and_slide()
+		return
+
+	var collider = move_and_collide(_direction * speed * delta)
 	if collider == null:
 		return
 
@@ -21,6 +29,7 @@ func _physics_process(delta: float):
 
 	if collider.name == "Paddle":
 		_direction = (position - collider.position).normalized()
+		stuck = sticky
 	else:
 		if collider.is_in_group("blocks") and not collider.is_solid:
 			collider.destroy()

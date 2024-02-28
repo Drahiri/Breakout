@@ -10,6 +10,7 @@ height = 100.0
 [node name="Paddle" type="CharacterBody2D"]
 position = Vector2(390, 541)
 collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_874vc")
 metadata/_edit_group_ = true
 

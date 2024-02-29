@@ -5,10 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://bhh4s6fkrqy6p" path="res://textures/powerup_passthrough.png" id="2_e2jar"]
 
 [node name="PowerUpPassthrough" instance=ExtResource("1_yij04")]
-modulate = Color(0.501961, 1, 0.501961, 1)
 script = ExtResource("2_47sbb")
 
 [node name="Sprite2D" parent="." index="0"]
+self_modulate = Color(0.501961, 1, 0.501961, 1)
 texture = ExtResource("2_e2jar")
 
 [node name="EffectDuration" parent="." index="3" groups=["passthrough"]]

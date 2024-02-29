@@ -5,10 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://ddp6rif1gl8yx" path="res://textures/powerup_confuse.png" id="2_ww2l2"]
 
 [node name="PowerUpConfuse" instance=ExtResource("1_jfpt8")]
-modulate = Color(1, 0.301961, 0.301961, 1)
 script = ExtResource("2_ostv8")
 
 [node name="Sprite2D" parent="." index="0"]
+self_modulate = Color(1, 0.301961, 0.301961, 1)
 texture = ExtResource("2_ww2l2")
 
 [node name="EffectDuration" parent="." index="3"]

@@ -17,11 +17,11 @@ grow_vertical = 2
 texture = ExtResource("3_llkyd")
 expand_mode = 1
 
-[node name="WorldBoundaries" parent="." instance=ExtResource("1_4pa81")]
-
-[node name="Level" parent="." instance=ExtResource("2_frxen")]
-
 [node name="Paddle" parent="." instance=ExtResource("4_6sutl")]
 
 [node name="Ball" parent="." instance=ExtResource("5_jstb8")]
 position = Vector2(404, 516)
+
+[node name="WorldBoundaries" parent="." instance=ExtResource("1_4pa81")]
+
+[node name="Level" parent="." instance=ExtResource("2_frxen")]

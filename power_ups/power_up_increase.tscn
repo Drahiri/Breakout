@@ -5,9 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://ec55lef4dv67" path="res://textures/powerup_increase.png" id="2_sjt2a"]
 
 [node name="PowerUpIncrease" instance=ExtResource("1_mw0vo")]
-modulate = Color(1, 0.6, 0.4, 1)
 script = ExtResource("2_36fjn")
-increase_size_multiplier = 1.5
+increase_size = 0.5
 
 [node name="Sprite2D" parent="." index="0"]
+self_modulate = Color(1, 0.6, 0.4, 1)
 texture = ExtResource("2_sjt2a")

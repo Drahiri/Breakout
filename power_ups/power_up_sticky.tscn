@@ -5,10 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://kiav7t2r6bkb" path="res://textures/powerup_sticky.png" id="2_k3s03"]
 
 [node name="PowerUpSticky" instance=ExtResource("1_0dipx")]
-modulate = Color(1, 0.501961, 1, 1)
 script = ExtResource("2_ajxxe")
 
 [node name="Sprite2D" parent="." index="0"]
+self_modulate = Color(1, 0.501961, 1, 1)
 texture = ExtResource("2_k3s03")
 
 [node name="EffectDuration" parent="." index="3"]

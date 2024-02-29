@@ -76,7 +76,7 @@ func _spawn_power_up(location: Vector2):
 		power_up_scene = power_up_scenes["passthrough"]
 	elif _should_spawn(75):
 		power_up_scene = power_up_scenes["increase"]
-	elif _should_spawn(15):
+	elif _should_spawn(5):
 		power_up_scene = power_up_scenes["confuse"]
 	elif _should_spawn(15):
 		power_up_scene = power_up_scenes["chaos"]

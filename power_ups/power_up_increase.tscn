@@ -6,7 +6,7 @@
 
 [node name="PowerUpIncrease" instance=ExtResource("1_mw0vo")]
 script = ExtResource("2_36fjn")
-increase_size = 0.5
+increase_by = 0.5
 
 [node name="Sprite2D" parent="." index="0"]
 self_modulate = Color(1, 0.6, 0.4, 1)

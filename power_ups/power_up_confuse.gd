@@ -1,12 +1,10 @@
 extends PowerUp
 
-@onready var confuse_effect = get_node("/root/Main/Effects/Confuse")
-
 func _effect():
+	EffectsManager.confuse_activated.emit()
 	$EffectDuration.start()
-	confuse_effect.show()
 
 
 func _on_effect_duration_timeout():
-	confuse_effect.hide()
+	EffectsManager.confuse_deactivated.emit()
 	queue_free()

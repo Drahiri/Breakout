@@ -8,9 +8,17 @@ extends CharacterBody2D
 
 var stuck := true
 var sticky := false
-var active_sticky_count := 0
 var passthrough := false
-var active_passthrough_count := 0
+
+
+func _ready():
+	EffectsManager.passthrough_activated.connect(_on_pasthrough_activated)
+	EffectsManager.passthrough_deactivated.connect(_on_pasthrough_deactivated)
+
+	EffectsManager.speed_activated.connect(_on_speed_activated)
+
+	EffectsManager.sticky_activated.connect(_on_sticky_activated)
+	EffectsManager.sticky_deactivated.connect(_on_sticky_deactivated)
 
 
 func _physics_process(delta: float):
@@ -20,7 +28,6 @@ func _physics_process(delta: float):
 		if Input.is_action_just_pressed("release_ball"):
 			stuck = false
 			velocity = _after_stuck_velocity
-
 		return
 
 	var collider = move_and_collide(velocity * delta)
@@ -41,3 +48,27 @@ func _resolve_collisions(collider: Node2D, collision_normal: Vector2):
 			return
 
 	velocity = velocity.bounce(collision_normal)
+
+
+#region Effects
+func _on_pasthrough_activated():
+	passthrough = true
+	$Sprite2D.self_modulate = Color(1.0, 0.5, 0.5)
+
+
+func _on_pasthrough_deactivated():
+	passthrough = false
+	$Sprite2D.self_modulate = Color(1.0, 1.0, 1.0)
+
+
+func _on_speed_activated(multiplier: float):
+	speed *= multiplier
+
+
+func _on_sticky_activated():
+	sticky = true
+
+
+func _on_sticky_deactivated():
+	sticky = false
+#endregion

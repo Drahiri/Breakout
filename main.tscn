@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://e1sufh0qlxr2"]
+[gd_scene load_steps=11 format=3 uid="uid://e1sufh0qlxr2"]
 
 [ext_resource type="PackedScene" uid="uid://b8k4fox7v4gmb" path="res://world_boundaries.tscn" id="1_4pa81"]
 [ext_resource type="PackedScene" uid="uid://dni10g1u548hx" path="res://level.tscn" id="2_frxen"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ddfwctkacd4hk" path="res://ball.tscn" id="5_jstb8"]
 [ext_resource type="Shader" path="res://power_ups/power_up_confuse.gdshader" id="6_gad1a"]
 [ext_resource type="Shader" path="res://power_ups/power_up_chaos.gdshader" id="6_njxl4"]
+[ext_resource type="Script" path="res://effects.gd" id="6_ppbpx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y2rgf"]
 shader = ExtResource("6_njxl4")
@@ -35,6 +36,7 @@ position = Vector2(404, 516)
 [node name="Level" parent="." instance=ExtResource("2_frxen")]
 
 [node name="Effects" type="Node2D" parent="."]
+script = ExtResource("6_ppbpx")
 
 [node name="Chaos" type="BackBufferCopy" parent="Effects"]
 visible = false
@@ -47,6 +49,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="Confuse" type="BackBufferCopy" parent="Effects"]
 visible = false

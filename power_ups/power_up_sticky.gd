@@ -1,15 +1,13 @@
 extends PowerUp
 
 func _effect():
-	Ball.sticky = true
-	Ball.active_sticky_count += 1
-	Paddle.modulate = Color(1.0, 0.5, 1.0)
+	EffectsManager.sticky_activated.emit()
+	EffectsManager.active_sticky += 1
 	$EffectDuration.start()
 
 
 func _on_effect_duration_timeout():
-	Ball.active_sticky_count -= 1
-	if Ball.active_sticky_count == 0:
-		Ball.sticky = false
-		Paddle.modulate = Color(1.0, 1.0, 1.0)
+	EffectsManager.active_sticky -= 1
+	if EffectsManager.active_sticky == 0:
+		EffectsManager.sticky_deactivated.emit()
 	queue_free()

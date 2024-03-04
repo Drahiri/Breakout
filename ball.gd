@@ -10,6 +10,7 @@ var stuck := true
 var sticky := false
 var passthrough := false
 
+signal shake
 
 func _ready():
 	EffectsManager.passthrough_activated.connect(_on_pasthrough_activated)
@@ -46,6 +47,8 @@ func _resolve_collisions(collider: Node2D, collision_normal: Vector2):
 		collider.destroy()
 		if passthrough:
 			return
+	else:
+		shake.emit()
 
 	velocity = velocity.bounce(collision_normal)
 

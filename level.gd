@@ -17,10 +17,6 @@ var power_up_scenes = {
 }
 
 
-func _ready():
-	load_level("res://levels/one.lvl")
-
-
 #region Level Creation
 func load_level(file_name: String):
 	var level_content = FileAccess.get_file_as_string(file_name)

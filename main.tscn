@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://e1sufh0qlxr2"]
+[gd_scene load_steps=12 format=3 uid="uid://e1sufh0qlxr2"]
 
 [ext_resource type="PackedScene" uid="uid://b8k4fox7v4gmb" path="res://world_boundaries.tscn" id="1_4pa81"]
+[ext_resource type="Script" path="res://main.gd" id="1_nhaso"]
 [ext_resource type="PackedScene" uid="uid://dni10g1u548hx" path="res://level.tscn" id="2_frxen"]
 [ext_resource type="Texture2D" uid="uid://ds8jtf73h3dw8" path="res://textures/background.jpg" id="3_llkyd"]
 [ext_resource type="PackedScene" uid="uid://q0q3bu257ea6" path="res://paddle.tscn" id="4_6sutl"]
@@ -16,6 +17,7 @@ shader = ExtResource("6_njxl4")
 shader = ExtResource("6_gad1a")
 
 [node name="Main" type="Node"]
+script = ExtResource("1_nhaso")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 15

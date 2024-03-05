@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://e1sufh0qlxr2"]
+[gd_scene load_steps=15 format=3 uid="uid://e1sufh0qlxr2"]
 
 [ext_resource type="PackedScene" uid="uid://b8k4fox7v4gmb" path="res://world_boundaries.tscn" id="1_4pa81"]
 [ext_resource type="Script" path="res://main.gd" id="1_nhaso"]
@@ -10,6 +10,7 @@
 [ext_resource type="Shader" path="res://power_ups/power_up_chaos.gdshader" id="6_njxl4"]
 [ext_resource type="Script" path="res://effects.gd" id="6_ppbpx"]
 [ext_resource type="Shader" path="res://shake.gdshader" id="10_kkjj2"]
+[ext_resource type="PackedScene" uid="uid://b2jqvs82ron2c" path="res://gui.tscn" id="11_fvf10"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y2rgf"]
 shader = ExtResource("6_njxl4")
@@ -88,6 +89,8 @@ color = Color(0, 0, 0, 1)
 [node name="ShakeTime" type="Timer" parent="Effects/Shake"]
 wait_time = 0.05
 one_shot = true
+
+[node name="GUI" parent="." instance=ExtResource("11_fvf10")]
 
 [connection signal="shake" from="Ball" to="Effects" method="_on_shake"]
 [connection signal="timeout" from="Effects/Shake/ShakeTime" to="Effects" method="_on_shake_time_timeout"]

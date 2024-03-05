@@ -47,6 +47,6 @@ offset_right = 20.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "Press ENTER to start
-Press Up or Down to Select Level"
+text = "Press Enter to start
+Press Up or Down to select level"
 horizontal_alignment = 1

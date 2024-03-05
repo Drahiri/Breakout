@@ -57,8 +57,22 @@ func _create_level(filename: String):
 	level.load_level(filename)
 	levels_scenes.append(level)
 	level.scored.connect(_on_scored)
+	level.completed.connect(_on_completed)
 	remove_child(level)
 
 func _on_scored():
 	score += 100
 	$GUI.update_score(score)
+
+
+func _on_completed():
+	$Paddle.reset()
+	$Ball.reset($Paddle.position)
+	$GUI.won(score)
+	await get_tree().create_timer(3.0).timeout
+	levels_scenes[current_level].queue_free()
+	levels_scenes.remove_at(current_level)
+	if current_level > len(levels_scenes):
+		current_level -= 1
+	_change_level()
+	set_process_input(true)

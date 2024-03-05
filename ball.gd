@@ -53,6 +53,13 @@ func _resolve_collisions(collider: Node2D, collision_normal: Vector2):
 	velocity = velocity.bounce(collision_normal)
 
 
+func reset(reset_position: Vector2):
+	sticky = false
+	speed = initial_speed
+	position = Vector2(reset_position.x, reset_position.y - 25.0)
+	$Sprite2D.self_modulate = Color(1.0, 1.0, 1.0)
+	set_physics_process(false)
+
 #region Effects
 func _on_pasthrough_activated():
 	passthrough = true
@@ -66,6 +73,7 @@ func _on_pasthrough_deactivated():
 
 func _on_speed_activated(multiplier: float):
 	speed *= multiplier
+	velocity = velocity.normalized() * speed
 
 
 func _on_sticky_activated():
@@ -74,4 +82,6 @@ func _on_sticky_activated():
 
 func _on_sticky_deactivated():
 	sticky = false
+	stuck = false
+	velocity = _after_stuck_velocity
 #endregion

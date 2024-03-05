@@ -14,6 +14,8 @@ func _process(_delta):
 	pass
 
 func _on_chaos_activated():
+	if $Confuse.is_visible():
+		$Confuse.hide()
 	$Chaos.show()
 
 func _on_chaos_deactivated():

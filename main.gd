@@ -4,13 +4,18 @@ var levels_scenes := []
 var current_level
 var current_level_index := 0
 
+var lifes = 3
+var score = 0
+
 func _ready():
 	_load_levels()
+	$Paddle.set_physics_process(false)
+	$Ball.set_physics_process(false)
 
 
 func _input(_event):
 	if Input.is_action_just_pressed("start_game"):
-		set_process_input(false)
+		_start_game()
 
 	if Input.is_action_just_pressed("next_level"):
 		current_level_index += 1
@@ -23,6 +28,14 @@ func _input(_event):
 			current_level_index = len(levels_scenes) - 1
 		_change_level()
 
+
+func _start_game():
+	set_process_input(false)
+	$Paddle.set_physics_process(true)
+	$Ball.set_physics_process(true)
+	$Effects/Chaos.hide()
+	$Effects/Confuse.hide()
+	$GUI.start_game(lifes, score)
 
 func _change_level():
 	remove_child(current_level)
@@ -45,4 +58,9 @@ func _create_level(filename: String):
 	$WorldBoundaries.add_sibling(level)
 	level.load_level(filename)
 	levels_scenes.append(level)
+	level.scored.connect(_on_scored)
 	remove_child(level)
+
+func _on_scored():
+	score += 100
+	$GUI.update_score(score)

@@ -7,6 +7,8 @@ var _block_count: int
 var _block_scale: Vector2
 var _offset: Vector2
 
+signal scored
+
 var power_up_scenes = {
 	"chaos": preload("res://power_ups/power_up_chaos.tscn"),
 	"confuse": preload("res://power_ups/power_up_confuse.tscn"),
@@ -86,3 +88,4 @@ func _spawn_power_up(location: Vector2):
 func _on_block_destroyed(location: Vector2):
 	_block_count -= 1
 	_spawn_power_up(location)
+	scored.emit()

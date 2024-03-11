@@ -87,9 +87,9 @@ func _on_sticky_activated():
 func _on_sticky_deactivated():
 	sticky = false
 	stuck = false
-	velocity = _after_stuck_velocity
 #endregion
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
+	_after_stuck_velocity = initial_direction.normalized() * initial_speed
 	exited.emit()

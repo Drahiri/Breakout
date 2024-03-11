@@ -10,12 +10,14 @@ func _ready():
 	_load_levels()
 	$Paddle.set_physics_process(false)
 	$Ball.set_physics_process(false)
-	$Music.play()
 
 
 func _input(_event):
 	if Input.is_action_just_pressed("start"):
 		_start_game()
+
+	if Input.is_action_just_pressed("exit"):
+		get_tree().quit()
 
 	if Input.is_action_just_pressed("next_level"):
 		current_level_id += 1
@@ -87,6 +89,8 @@ func _won():
 
 	if !levels_scenes.is_empty():
 		$WorldBoundaries.add_sibling(levels_scenes[current_level_id])
+	else:
+		$GUI.finished()
 
 	set_process_input(true)
 

@@ -29,7 +29,11 @@ func won():
 func lost():
 	$Center.text = "YOU LOST! SCORED: %d\nPress Up or Down to select level\nPress Enter to start" % score
 	score = 0
+	$Score.text = "Score: 0"
 	_toggle_center_sides()
+
+func finished():
+	$Center.text = "CONGRATULATION!!!\nYou finished all levels with score: %d\nPress Esc to exit" % score
 
 
 func _toggle_center_sides():

@@ -67,6 +67,4 @@ stream = ExtResource("4_t2b4h")
 [node name="SolidSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_cvwfh")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

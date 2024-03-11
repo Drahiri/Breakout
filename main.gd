@@ -8,16 +8,15 @@ var lifes = 3
 
 func _ready():
 	_load_levels()
+	$Paddle.hide()
 	$Paddle.set_physics_process(false)
+	$Ball.hide()
 	$Ball.set_physics_process(false)
 
 
 func _input(_event):
 	if Input.is_action_just_pressed("start"):
 		_start_game()
-
-	if Input.is_action_just_pressed("exit"):
-		get_tree().quit()
 
 	if Input.is_action_just_pressed("next_level"):
 		current_level_id += 1
@@ -31,9 +30,16 @@ func _input(_event):
 		_change_level()
 
 
+func _unhandled_input(_event):
+	if Input.is_action_just_pressed("exit"):
+		get_tree().quit()
+
+
 func _start_game():
 	set_process_input(false)
+	$Paddle.show()
 	$Paddle.set_physics_process(true)
+	$Ball.show()
 	$Ball.set_physics_process(true)
 	$Effects/Chaos.hide()
 	$Effects/Confuse.hide()
@@ -71,8 +77,10 @@ func _on_scored():
 
 
 func _menu():
+	$Paddle.hide()
 	$Paddle.reset()
 	$Paddle.set_physics_process(false)
+	$Ball.hide()
 	$Ball.reset($Paddle.position)
 	$Ball.set_physics_process(false)
 	$Effects/Chaos.hide()
@@ -83,6 +91,7 @@ func _won():
 	_menu()
 	$GUI.won()
 	await get_tree().create_timer(2.0).timeout
+	$GUI.default_message()
 	levels_scenes.remove_at(current_level_id)
 	if current_level_id >= len(levels_scenes):
 		current_level_id -= 1
@@ -96,7 +105,8 @@ func _won():
 
 
 func _on_ball_exited():
-	lifes -= 1
+	if $Ball.is_visible():
+		lifes -= 1
 	$Paddle.reset()
 	$Ball.reset($Paddle.position)
 	$GUI.update_lifes(lifes)
@@ -107,7 +117,10 @@ func _on_ball_exited():
 func _lost():
 	_menu()
 	$GUI.lost()
-	await get_tree().create_timer(2.0).timeout
+	$Effects/Chaos.show()
+	await get_tree().create_timer(5.0).timeout
+	$GUI.default_message()
+	$Effects/Chaos.hide()
 	remove_child(get_node("Level"))
 	for level in levels_scenes:
 		level.queue_free()

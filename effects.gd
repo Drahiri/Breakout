@@ -10,16 +10,16 @@ func _ready():
 	EffectsManager.confuse_activated.connect(_on_confuse_activated)
 	EffectsManager.confuse_deactivated.connect(_on_confuse_deactivated)
 
-func _process(_delta):
-	pass
 
 func _on_chaos_activated():
 	if $Confuse.is_visible():
 		$Confuse.hide()
 	$Chaos.show()
 
+
 func _on_chaos_deactivated():
 	$Chaos.hide()
+
 
 func _on_confuse_activated():
 	if not $Chaos.is_visible():

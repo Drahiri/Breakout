@@ -68,17 +68,20 @@ func _on_scored():
 
 
 func won():
+	$Level.queue_free()
 	$Paddle.reset()
 	$Paddle.set_physics_process(false)
 	$Ball.reset($Paddle.position)
 	$Ball.set_physics_process(false)
 	$GUI.won()
 	await get_tree().create_timer(2.0).timeout
-	levels_scenes[current_level_id].queue_free()
 	levels_scenes.remove_at(current_level_id)
-	if current_level_id > len(levels_scenes):
+	if current_level_id >= len(levels_scenes):
 		current_level_id -= 1
-	_change_level()
+
+	if !levels_scenes.is_empty():
+		$WorldBoundaries.add_sibling(levels_scenes[current_level_id])
+
 	set_process_input(true)
 
 

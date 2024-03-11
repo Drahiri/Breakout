@@ -42,14 +42,17 @@ func _resolve_collisions(collider: Node2D, collision_normal: Vector2):
 		velocity = (position - collider.position).normalized() * speed
 		_after_stuck_velocity = velocity
 		stuck = sticky
+		$SolidSound.play()
 		return
 
 	if collider.is_in_group("blocks") and not collider.is_solid:
 		collider.destroy()
+		$NormalSound.play()
 		if passthrough:
 			return
 	else:
 		shake.emit()
+		$SolidSound.play()
 
 	velocity = velocity.bounce(collision_normal)
 

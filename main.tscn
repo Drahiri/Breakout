@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://e1sufh0qlxr2"]
+[gd_scene load_steps=15 format=3 uid="uid://e1sufh0qlxr2"]
 
 [ext_resource type="PackedScene" uid="uid://b8k4fox7v4gmb" path="res://world_boundaries.tscn" id="1_4pa81"]
 [ext_resource type="Script" path="res://main.gd" id="1_nhaso"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://effects.gd" id="6_ppbpx"]
 [ext_resource type="Shader" path="res://shake.gdshader" id="10_kkjj2"]
 [ext_resource type="PackedScene" uid="uid://b2jqvs82ron2c" path="res://gui.tscn" id="11_fvf10"]
+[ext_resource type="AudioStream" uid="uid://2vloxeo6ncu3" path="res://audio/breakout.mp3" id="11_idflc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y2rgf"]
 shader = ExtResource("6_njxl4")
@@ -89,6 +90,10 @@ wait_time = 0.05
 one_shot = true
 
 [node name="GUI" parent="." instance=ExtResource("11_fvf10")]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_idflc")
+volume_db = -10.0
 
 [connection signal="exited" from="Ball" to="." method="_on_ball_exited"]
 [connection signal="shake" from="Ball" to="Effects" method="_on_shake"]

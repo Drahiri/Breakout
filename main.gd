@@ -10,6 +10,7 @@ func _ready():
 	_load_levels()
 	$Paddle.set_physics_process(false)
 	$Ball.set_physics_process(false)
+	$Music.play()
 
 
 func _input(_event):

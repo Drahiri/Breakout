@@ -55,6 +55,7 @@ func _resolve_collisions(collider: Node2D, collision_normal: Vector2):
 
 func reset(reset_position: Vector2):
 	sticky = false
+	stuck = true
 	speed = initial_speed
 	position = Vector2(reset_position.x, reset_position.y - 25.0)
 	$Sprite2D.self_modulate = Color(1.0, 1.0, 1.0)

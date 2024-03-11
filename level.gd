@@ -26,9 +26,9 @@ func load_level(file_name: String):
 	var rows = level_content.split("\n", false)
 	var num_of_rows = len(rows)
 	var num_of_columns = len(rows[0].split(" ", false))
-
+#
 	_set_level_offsets(num_of_rows, num_of_columns)
-
+#
 	for i in range(num_of_rows):
 		var column = rows[i].split(" ", false)
 		for j in range(num_of_columns):
@@ -38,6 +38,7 @@ func load_level(file_name: String):
 func _add_block(type: int, location: Vector2):
 	var block = BlockScene.instantiate()
 	if(type == block.Types.EMPTY):
+		block.queue_free()
 		return
 
 	block.position = location
@@ -51,12 +52,15 @@ func _add_block(type: int, location: Vector2):
 
 func _set_level_offsets(rows: int, columns: int):
 	var screen_size: Vector2 = get_viewport_rect().size
-	var block_size = BlockScene.instantiate().get_size()
+	var block_scene = BlockScene.instantiate()
+	var block_size = block_scene.get_size()
 	_block_scale.x = screen_size.x / (block_size.x * columns)
 	_block_scale.y = (screen_size.y / 2) / (block_size.y * rows)
 
 	_offset.x = block_size.x * _block_scale.x
 	_offset.y = block_size.y * _block_scale.y
+
+	block_scene.queue_free()
 #endregion
 
 

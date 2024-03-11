@@ -8,8 +8,7 @@ func _ready():
 
 
 func start_game(lifes: int):
-	$Lifes.text = "Lifes: %d" % lifes
-	$Score.text = "Score: %d" % score
+	update_lifes(lifes)
 	_toggle_center_sides()
 
 
@@ -18,8 +17,18 @@ func update_score():
 	$Score.text = "Score: %d" % score
 
 
+func update_lifes(lifes: int):
+	$Lifes.text = "Lifes: %d" % lifes
+
+
 func won():
 	$Center.text = "YOU WON! SCORED: %d\nPress Up or Down to select level\nPress Enter to start" % score
+	_toggle_center_sides()
+
+
+func lost():
+	$Center.text = "YOU LOST! SCORED: %d\nPress Up or Down to select level\nPress Enter to start" % score
+	score = 0
 	_toggle_center_sides()
 
 

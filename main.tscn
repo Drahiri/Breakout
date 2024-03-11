@@ -90,5 +90,6 @@ one_shot = true
 
 [node name="GUI" parent="." instance=ExtResource("11_fvf10")]
 
+[connection signal="exited" from="Ball" to="." method="_on_ball_exited"]
 [connection signal="shake" from="Ball" to="Effects" method="_on_shake"]
 [connection signal="timeout" from="Effects/Shake/ShakeTime" to="Effects" method="_on_shake_time_timeout"]

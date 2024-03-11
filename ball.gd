@@ -11,6 +11,7 @@ var sticky := false
 var passthrough := false
 
 signal shake
+signal exited
 
 func _ready():
 	EffectsManager.passthrough_activated.connect(_on_pasthrough_activated)
@@ -59,7 +60,6 @@ func reset(reset_position: Vector2):
 	speed = initial_speed
 	position = Vector2(reset_position.x, reset_position.y - 25.0)
 	$Sprite2D.self_modulate = Color(1.0, 1.0, 1.0)
-	set_physics_process(false)
 
 #region Effects
 func _on_pasthrough_activated():
@@ -86,3 +86,7 @@ func _on_sticky_deactivated():
 	stuck = false
 	velocity = _after_stuck_velocity
 #endregion
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	exited.emit()

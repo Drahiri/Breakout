@@ -19,7 +19,7 @@ offset_top = 5.0
 offset_right = 73.0
 offset_bottom = 28.0
 theme_override_fonts/font = ExtResource("1_dfr5q")
-text = "Score: "
+text = "Score: 0"
 
 [node name="Lifes" type="Label" parent="."]
 layout_mode = 1

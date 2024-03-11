@@ -13,7 +13,7 @@ func _ready():
 
 
 func _input(_event):
-	if Input.is_action_just_pressed("start_game"):
+	if Input.is_action_just_pressed("start"):
 		_start_game()
 
 	if Input.is_action_just_pressed("next_level"):
@@ -48,7 +48,6 @@ func _load_levels():
 
 	for level_file in available_levels:
 		_create_level("res://levels/" + level_file)
-
 	$WorldBoundaries.add_sibling(levels_scenes[current_level_id])
 
 
@@ -58,7 +57,7 @@ func _create_level(filename: String):
 	$WorldBoundaries.add_sibling(level)
 	level.load_level(filename)
 	level.scored.connect(_on_scored)
-	level.completed.connect(_on_completed)
+	level.completed.connect(won)
 	remove_child(level)
 
 	levels_scenes.append(level)
@@ -68,15 +67,41 @@ func _on_scored():
 	$GUI.update_score()
 
 
-func _on_completed():
+func won():
 	$Paddle.reset()
+	$Paddle.set_physics_process(false)
 	$Ball.reset($Paddle.position)
+	$Ball.set_physics_process(false)
 	$GUI.won()
-	await get_tree().create_timer(3.0).timeout
+	await get_tree().create_timer(2.0).timeout
 	levels_scenes[current_level_id].queue_free()
-	print(levels_scenes)
 	levels_scenes.remove_at(current_level_id)
 	if current_level_id > len(levels_scenes):
 		current_level_id -= 1
 	_change_level()
+	set_process_input(true)
+
+
+func _on_ball_exited():
+	lifes -= 1
+	$Paddle.reset()
+	$Ball.reset($Paddle.position)
+	$GUI.update_lifes(lifes)
+	if lifes == 0:
+		lost()
+
+
+func lost():
+	$Paddle.reset()
+	$Paddle.set_physics_process(false)
+	$Ball.reset($Paddle.position)
+	$Ball.set_physics_process(false)
+	$GUI.lost()
+	await get_tree().create_timer(2.0).timeout
+	remove_child(get_node("Level"))
+	for level in levels_scenes:
+		level.queue_free()
+	levels_scenes.clear()
+
+	_load_levels()
 	set_process_input(true)

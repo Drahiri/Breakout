@@ -19,7 +19,6 @@ func reset():
 	scale.x = 1.0
 	position.x = get_viewport_rect().size.x / 2
 	$Sprite2D.self_modulate = Color(1.0, 1.0, 1.0)
-	set_physics_process(false)
 
 #region Effects
 func _on_increase_activated(increase_by: float):

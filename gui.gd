@@ -21,16 +21,20 @@ func update_lifes(lifes: int):
 	$Lifes.text = "Lifes: %d" % lifes
 
 
+func default_message():
+	$Center.text = "Press Up or Down to select level\nPress Enter to start or Esc to exit"
+
+
 func won():
-	$Center.text = "YOU WON! SCORED: %d\nPress Up or Down to select level\nPress Enter to start" % score
 	_toggle_center_sides()
+	$Center.text = "YOU WON! SCORED: %d" % score
 
 
 func lost():
-	$Center.text = "YOU LOST! SCORED: %d\nPress Up or Down to select level\nPress Enter to start" % score
+	_toggle_center_sides()
+	$Center.text = "YOU LOST! SCORED: %d" % score
 	score = 0
 	$Score.text = "Score: 0"
-	_toggle_center_sides()
 
 func finished():
 	$Center.text = "CONGRATULATION!!!\nYou finished all levels with score: %d\nPress Esc to exit" % score

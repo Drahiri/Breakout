@@ -57,7 +57,7 @@ func _create_level(filename: String):
 	$WorldBoundaries.add_sibling(level)
 	level.load_level(filename)
 	level.scored.connect(_on_scored)
-	level.completed.connect(won)
+	level.completed.connect(_won)
 	remove_child(level)
 
 	levels_scenes.append(level)
@@ -67,12 +67,17 @@ func _on_scored():
 	$GUI.update_score()
 
 
-func won():
-	$Level.queue_free()
+func _menu():
 	$Paddle.reset()
 	$Paddle.set_physics_process(false)
 	$Ball.reset($Paddle.position)
 	$Ball.set_physics_process(false)
+	$Effects/Chaos.hide()
+	$Effects/Confuse.hide()
+
+func _won():
+	$Level.queue_free()
+	_menu()
 	$GUI.won()
 	await get_tree().create_timer(2.0).timeout
 	levels_scenes.remove_at(current_level_id)
@@ -91,14 +96,11 @@ func _on_ball_exited():
 	$Ball.reset($Paddle.position)
 	$GUI.update_lifes(lifes)
 	if lifes == 0:
-		lost()
+		_lost()
 
 
-func lost():
-	$Paddle.reset()
-	$Paddle.set_physics_process(false)
-	$Ball.reset($Paddle.position)
-	$Ball.set_physics_process(false)
+func _lost():
+	_menu()
 	$GUI.lost()
 	await get_tree().create_timer(2.0).timeout
 	remove_child(get_node("Level"))

@@ -1,6 +1,6 @@
 extends Control
 
-var score = 0
+var _score = 0
 
 func _ready():
 	$Score.hide()
@@ -13,8 +13,8 @@ func start_game(lifes: int):
 
 
 func update_score():
-	score += 100
-	$Score.text = "Score: %d" % score
+	_score += 100
+	$Score.text = "Score: %d" % _score
 
 
 func update_lifes(lifes: int):
@@ -22,22 +22,26 @@ func update_lifes(lifes: int):
 
 
 func default_message():
-	$Center.text = "Press Up or Down to select level\nPress Enter to start or Esc to exit"
+	$Center.text = "Press Up or Down to select level\n\
+		Press Enter to start or Esc to exit"
 
 
 func won():
 	_toggle_center_sides()
-	$Center.text = "YOU WON! SCORED: %d" % score
+	$Center.text = "YOU WON! SCORED: %d" % _score
 
 
 func lost():
 	_toggle_center_sides()
-	$Center.text = "YOU LOST! SCORED: %d" % score
-	score = 0
+	$Center.text = "YOU LOST! SCORED: %d" % _score
+	_score = 0
 	$Score.text = "Score: 0"
 
+
 func finished():
-	$Center.text = "CONGRATULATION!!!\nYou finished all levels with score: %d\nPress Esc to exit" % score
+	$Center.text = "CONGRATULATION!!!\n\
+		You finished all levels with score: %d\n\
+		Press Esc to exit" % _score
 
 
 func _toggle_center_sides():

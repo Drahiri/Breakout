@@ -23,6 +23,7 @@ const COLORS := {
 var is_solid := false
 var type: Types
 
+
 func _ready():
 	if(type == Types.SOLID):
 		is_solid = true
@@ -30,8 +31,10 @@ func _ready():
 	else:
 		modulate = COLORS[type]
 
+
 func get_size():
 	return $Sprite2D.texture.get_size()
+
 
 func destroy():
 	queue_free()

@@ -1,9 +1,9 @@
 extends Node
 
-var levels_scenes := []
-var current_level_id := 0
-
 var lifes = 3
+
+var _levels_scenes := []
+var _current_level_id := 0
 
 
 func _ready():
@@ -13,20 +13,19 @@ func _ready():
 	$Ball.hide()
 	$Ball.set_physics_process(false)
 
-
 func _input(_event):
 	if Input.is_action_just_pressed("start"):
 		_start_game()
 
 	if Input.is_action_just_pressed("next_level"):
-		current_level_id += 1
-		current_level_id %= len(levels_scenes)
+		_current_level_id += 1
+		_current_level_id %= len(_levels_scenes)
 		_change_level()
 
 	if Input.is_action_just_pressed("previous_level"):
-		current_level_id -= 1
-		if current_level_id < 0:
-			current_level_id = len(levels_scenes) - 1
+		_current_level_id -= 1
+		if _current_level_id < 0:
+			_current_level_id = len(_levels_scenes) - 1
 		_change_level()
 
 
@@ -49,7 +48,7 @@ func _start_game():
 func _change_level():
 	var level_in_tree = get_node("Level")
 	remove_child(level_in_tree)
-	$WorldBoundaries.add_sibling(levels_scenes[current_level_id])
+	$WorldBoundaries.add_sibling(_levels_scenes[_current_level_id])
 
 
 func _load_levels():
@@ -57,7 +56,7 @@ func _load_levels():
 
 	for level_file in available_levels:
 		_create_level("res://levels/" + level_file)
-	$WorldBoundaries.add_sibling(levels_scenes[current_level_id])
+	$WorldBoundaries.add_sibling(_levels_scenes[_current_level_id])
 
 
 func _create_level(filename: String):
@@ -69,7 +68,7 @@ func _create_level(filename: String):
 	level.completed.connect(_won)
 	remove_child(level)
 
-	levels_scenes.append(level)
+	_levels_scenes.append(level)
 
 
 func _on_scored():
@@ -92,12 +91,12 @@ func _won():
 	$GUI.won()
 	await get_tree().create_timer(2.0).timeout
 	$GUI.default_message()
-	levels_scenes.remove_at(current_level_id)
-	if current_level_id >= len(levels_scenes):
-		current_level_id -= 1
+	_levels_scenes.remove_at(_current_level_id)
+	if _current_level_id >= len(_levels_scenes):
+		_current_level_id -= 1
 
-	if !levels_scenes.is_empty():
-		$WorldBoundaries.add_sibling(levels_scenes[current_level_id])
+	if !_levels_scenes.is_empty():
+		$WorldBoundaries.add_sibling(_levels_scenes[_current_level_id])
 	else:
 		$GUI.finished()
 
@@ -122,9 +121,9 @@ func _lost():
 	$GUI.default_message()
 	$Effects/Chaos.hide()
 	remove_child(get_node("Level"))
-	for level in levels_scenes:
+	for level in _levels_scenes:
 		level.queue_free()
-	levels_scenes.clear()
+	_levels_scenes.clear()
 
 	_load_levels()
 	set_process_input(true)

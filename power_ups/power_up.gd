@@ -1,12 +1,8 @@
-extends RigidBody2D
 class_name PowerUp
+extends RigidBody2D
 
 func _ready():
 	linear_velocity.y = 150.0
-
-
-func _process(_delta):
-	pass
 
 
 func _effect():

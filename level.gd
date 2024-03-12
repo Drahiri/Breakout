@@ -1,5 +1,8 @@
 extends Node2D
 
+signal scored
+signal completed
+
 @export var BlockScene: PackedScene
 @export var PowerUpScene: PackedScene
 
@@ -7,10 +10,8 @@ var _block_count: int
 var _block_scale: Vector2
 var _offset: Vector2
 
-signal scored
-signal completed
 
-var power_up_scenes = {
+var _power_up_scenes = {
 	"chaos": preload("res://power_ups/power_up_chaos.tscn"),
 	"confuse": preload("res://power_ups/power_up_confuse.tscn"),
 	"increase": preload("res://power_ups/power_up_increase.tscn"),
@@ -72,17 +73,17 @@ func _spawn_power_up(location: Vector2):
 	var power_up_scene: PackedScene
 
 	if _should_spawn(75):
-		power_up_scene = power_up_scenes["speed"]
+		power_up_scene = _power_up_scenes["speed"]
 	elif _should_spawn(75):
-		power_up_scene = power_up_scenes["sticky"]
+		power_up_scene = _power_up_scenes["sticky"]
 	elif _should_spawn(75):
-		power_up_scene = power_up_scenes["passthrough"]
+		power_up_scene = _power_up_scenes["passthrough"]
 	elif _should_spawn(75):
-		power_up_scene = power_up_scenes["increase"]
+		power_up_scene = _power_up_scenes["increase"]
 	elif _should_spawn(15):
-		power_up_scene = power_up_scenes["confuse"]
+		power_up_scene = _power_up_scenes["confuse"]
 	elif _should_spawn(15):
-		power_up_scene = power_up_scenes["chaos"]
+		power_up_scene = _power_up_scenes["chaos"]
 
 	if power_up_scene != null:
 		var power_up = power_up_scene.instantiate()

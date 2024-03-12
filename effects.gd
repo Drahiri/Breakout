@@ -25,6 +25,7 @@ func _on_confuse_activated():
 	if not $Chaos.is_visible():
 		$Confuse.show()
 
+
 func _on_confuse_deactivated():
 	$Confuse.hide()
 

@@ -1,17 +1,18 @@
 extends CharacterBody2D
 
+signal shake
+signal exited
+
 @export var initial_direction := Vector2(100.0, -350.0)
 @export var initial_speed: float = 364.0
-
-@onready var speed: float = initial_speed
-@onready var _after_stuck_velocity := initial_direction.normalized() * initial_speed
 
 var stuck := true
 var sticky := false
 var passthrough := false
 
-signal shake
-signal exited
+@onready var speed: float = initial_speed
+@onready var _after_stuck_velocity := initial_direction.normalized() * initial_speed
+
 
 func _ready():
 	EffectsManager.passthrough_activated.connect(_on_pasthrough_activated)
@@ -37,6 +38,14 @@ func _physics_process(delta: float):
 		_resolve_collisions(collider.get_collider(), collider.get_normal())
 
 
+func reset(reset_position: Vector2):
+	sticky = false
+	stuck = true
+	speed = initial_speed
+	position = Vector2(reset_position.x, reset_position.y - 25.0)
+	$Sprite2D.self_modulate = Color(1.0, 1.0, 1.0)
+
+
 func _resolve_collisions(collider: Node2D, collision_normal: Vector2):
 	if collider.name == "Paddle":
 		velocity = (position - collider.position).normalized() * speed
@@ -56,13 +65,6 @@ func _resolve_collisions(collider: Node2D, collision_normal: Vector2):
 
 	velocity = velocity.bounce(collision_normal)
 
-
-func reset(reset_position: Vector2):
-	sticky = false
-	stuck = true
-	speed = initial_speed
-	position = Vector2(reset_position.x, reset_position.y - 25.0)
-	$Sprite2D.self_modulate = Color(1.0, 1.0, 1.0)
 
 #region Effects
 func _on_pasthrough_activated():
@@ -86,7 +88,6 @@ func _on_sticky_activated():
 
 func _on_sticky_deactivated():
 	sticky = false
-	stuck = false
 #endregion
 
 
